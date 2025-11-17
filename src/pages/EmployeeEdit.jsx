@@ -18,7 +18,7 @@ const EmployeeEdit = () => {
   const fetchEmployee = async () => {
     try {
       const response = await axiosClient.get(`/employees/${id}`);
-      setEmployee(response.data);
+      setEmployee(response.data.data);
       setFetchLoading(false);
     } catch (err) {
       setError('Failed to fetch employee details');

@@ -16,7 +16,7 @@ const EmployeeDetails = () => {
   const fetchEmployee = async () => {
     try {
       const response = await axiosClient.get(`/employees/${id}`);
-      setEmployee(response.data);
+      setEmployee(response.data.data);
       setLoading(false);
     } catch (err) {
       setError('Failed to fetch employee details');
@@ -81,10 +81,10 @@ const EmployeeDetails = () => {
         <div className="card-body">
           <div className="row">
             <div className="col-md-4 text-center">
-              {employee.profileImageUrl ? (
+              {employee.profile_picture ? (
                 <img
-                  src={`http://localhost:3001/${employee.profileImageUrl}`}
-                  alt={`${employee.firstName} ${employee.lastName}`}
+                  src={`http://localhost:3001/uploads/${employee.profile_picture}`}
+                  alt={`${employee.first_name} ${employee.last_name}`}
                   className="img-fluid rounded"
                   style={{ maxWidth: '300px', maxHeight: '300px' }}
                 />
@@ -102,11 +102,11 @@ const EmployeeDetails = () => {
                 <tbody>
                   <tr>
                     <th width="30%">First Name</th>
-                    <td>{employee.firstName}</td>
+                    <td>{employee.first_name}</td>
                   </tr>
                   <tr>
                     <th>Last Name</th>
-                    <td>{employee.lastName}</td>
+                    <td>{employee.last_name}</td>
                   </tr>
                   <tr>
                     <th>Email</th>
@@ -123,8 +123,8 @@ const EmployeeDetails = () => {
                   <tr>
                     <th>Date of Joining</th>
                     <td>
-                      {employee.dateOfJoining
-                        ? new Date(employee.dateOfJoining).toLocaleDateString()
+                      {employee.date_of_joining
+                        ? new Date(employee.date_of_joining).toLocaleDateString()
                         : 'N/A'}
                     </td>
                   </tr>

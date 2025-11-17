@@ -28,7 +28,7 @@ const EmployeeSearch = () => {
       if (position) params.position = position;
 
       const response = await axiosClient.get('/employees/search', { params });
-      setEmployees(response.data);
+      setEmployees(response.data.data);
       setSearched(true);
       setLoading(false);
     } catch (err) {
@@ -142,10 +142,10 @@ const EmployeeSearch = () => {
                     {employees.map((employee) => (
                       <tr key={employee._id}>
                         <td>
-                          {employee.profileImageUrl ? (
+                          {employee.profile_picture ? (
                             <img
-                              src={`http://localhost:3001/${employee.profileImageUrl}`}
-                              alt={`${employee.firstName} ${employee.lastName}`}
+                              src={`http://localhost:3001/uploads/${employee.profile_picture}`}
+                              alt={`${employee.first_name} ${employee.last_name}`}
                               style={{
                                 width: '50px',
                                 height: '50px',
@@ -169,7 +169,7 @@ const EmployeeSearch = () => {
                             </div>
                           )}
                         </td>
-                        <td>{`${employee.firstName} ${employee.lastName}`}</td>
+                        <td>{`${employee.first_name} ${employee.last_name}`}</td>
                         <td>{employee.email}</td>
                         <td>{employee.position}</td>
                         <td>{employee.department}</td>

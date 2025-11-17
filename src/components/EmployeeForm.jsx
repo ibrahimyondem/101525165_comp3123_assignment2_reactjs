@@ -17,18 +17,18 @@ const EmployeeForm = ({ employee, onSubmit, loading }) => {
   useEffect(() => {
     if (employee) {
       setFormData({
-        firstName: employee.firstName || '',
-        lastName: employee.lastName || '',
+        firstName: employee.first_name || '',
+        lastName: employee.last_name || '',
         email: employee.email || '',
         position: employee.position || '',
         department: employee.department || '',
-        dateOfJoining: employee.dateOfJoining
-          ? employee.dateOfJoining.split('T')[0]
+        dateOfJoining: employee.date_of_joining
+          ? employee.date_of_joining.split('T')[0]
           : '',
         salary: employee.salary || '',
       });
-      if (employee.profileImageUrl) {
-        setImagePreview(`http://localhost:3001/${employee.profileImageUrl}`);
+      if (employee.profile_picture) {
+        setImagePreview(`http://localhost:3001/uploads/${employee.profile_picture}`);
       }
     }
   }, [employee]);
@@ -99,17 +99,17 @@ const EmployeeForm = ({ employee, onSubmit, loading }) => {
     }
 
     const data = new FormData();
-    data.append('firstName', formData.firstName);
-    data.append('lastName', formData.lastName);
+    data.append('first_name', formData.firstName);
+    data.append('last_name', formData.lastName);
     data.append('email', formData.email);
     data.append('position', formData.position);
     data.append('department', formData.department);
     data.append('salary', formData.salary);
     if (formData.dateOfJoining) {
-      data.append('dateOfJoining', formData.dateOfJoining);
+      data.append('date_of_joining', formData.dateOfJoining);
     }
     if (profileImage) {
-      data.append('profileImage', profileImage);
+      data.append('profile_picture', profileImage);
     }
 
     onSubmit(data);
