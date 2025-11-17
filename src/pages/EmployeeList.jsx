@@ -14,7 +14,7 @@ const EmployeeList = () => {
   const fetchEmployees = async () => {
     try {
       const response = await axiosClient.get('/employees');
-      setEmployees(response.data);
+      setEmployees(response.data.data);
       setLoading(false);
     } catch (err) {
       setError('Failed to fetch employees');
@@ -79,10 +79,10 @@ const EmployeeList = () => {
               {employees.map((employee) => (
                 <tr key={employee._id}>
                   <td>
-                    {employee.profileImageUrl ? (
+                    {employee.profile_picture ? (
                       <img
-                        src={`http://localhost:3001/${employee.profileImageUrl}`}
-                        alt={`${employee.firstName} ${employee.lastName}`}
+                        src={`http://localhost:3001/uploads/${employee.profile_picture}`}
+                        alt={`${employee.first_name} ${employee.last_name}`}
                         style={{
                           width: '50px',
                           height: '50px',
@@ -106,7 +106,7 @@ const EmployeeList = () => {
                       </div>
                     )}
                   </td>
-                  <td>{`${employee.firstName} ${employee.lastName}`}</td>
+                  <td>{`${employee.first_name} ${employee.last_name}`}</td>
                   <td>{employee.email}</td>
                   <td>{employee.position}</td>
                   <td>{employee.department}</td>
